@@ -70,7 +70,7 @@ var resolve = module.exports = function (url, cb) {
               fs.rename(tmp, cache, function (err) {
                 pkg.hash = h
                 pkg.from = url
-                cb(cache, pkg)
+                cb(err, pkg)
               })
             }
           })
