@@ -50,10 +50,15 @@ var resolve = module.exports = function (url, cb) {
           var tarball = path.join(tmp, 'package.tgz')
 
           fs.rename(source, dest, function (err) {
+            if(err) return cb(err)
             var n = 2, pkg
             fstream.Reader({path: dest, type: 'Directory'})
               .pipe(tar.Pack({path: dest}))
               .pipe(zlib.createGzip())
+              .on('error', function (err) {
+                n = -1
+                cb(err)
+              })
               .pipe(fs.createWriteStream(tarball))
               .on('finish', next)
             
