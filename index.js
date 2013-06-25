@@ -31,6 +31,9 @@ var resolve = module.exports = function (url, cb) {
     var res = request.get(_url)
     res
       .pipe(zlib.createGunzip())
+      .on('error', function (err) {
+        n = -1; cb(err)
+      })
       .pipe(tar.Extract({path: tmp}))
       .on('close', next)
 
@@ -45,6 +48,7 @@ var resolve = module.exports = function (url, cb) {
         var h = hash.digest('hex')
 
         fs.readdir(tmp, function (err, ls) {
+          if(err) return cb(err)
           var source  = path.join(tmp, ls[0])
           var dest    = path.join(tmp, 'package')
           var tarball = path.join(tmp, 'package.tgz')
