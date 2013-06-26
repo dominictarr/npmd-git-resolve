@@ -31,7 +31,6 @@ var resolve = module.exports = function (url, cb) {
     return cb(new Error('cannot request from:'+url))
 
   mkdirp(tmp, function () {
-    console.error(_url)
     var res = request.get(_url)
     res
       .pipe(zlib.createGunzip())
