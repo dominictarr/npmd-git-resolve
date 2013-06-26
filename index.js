@@ -77,7 +77,7 @@ var resolve = module.exports = function (url, cb) {
               if(--n) return
               var cache = path.join(process.env.HOME, '.npm', pkg.name, h)
               fs.rename(tmp, cache, function (err) {
-                pkg.hash = h
+                pkg.shasum = h
                 pkg.from = url
                 cb(err, pkg)
               })
