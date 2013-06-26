@@ -17,7 +17,7 @@ function toGithubDownload (repo) {
 
   var m = /^git:\/\/github.com\/([^#]+?).git(?:#(.*))?$/.exec(repo)
 
-  if(m) return 'https://codeload.github.com/' + m[1] + '/tar.gz/' + m[2]
+  if(m) return 'https://codeload.github.com/' + m[1] + '/tar.gz/' + (m[2] || 'master')
   return null
 }
 
@@ -27,7 +27,11 @@ var resolve = module.exports = function (url, cb) {
   var tmpFile = path.join(tmp, 'package.tgz')
   var tmpDir = path.join(tmp, 'package')
   var _url = toGithubDownload(url)
+  if(!_url)
+    return cb(new Error('cannot request from:'+url))
+
   mkdirp(tmp, function () {
+    console.error(_url)
     var res = request.get(_url)
     res
       .pipe(zlib.createGunzip())
