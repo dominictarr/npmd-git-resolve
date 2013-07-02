@@ -8,6 +8,7 @@ var zlib = require('zlib')
 var fstream = require('fstream')
 var path = require('path')
 var request = require('request')
+var os = require('os')
 
 function toGithubDownload (repo) {
   //git://github.com/substack/sockjs-client.git#browserify-npm
@@ -21,9 +22,12 @@ function toGithubDownload (repo) {
   return null
 }
 
-var resolve = module.exports = function (url, cb) {
+var resolve = module.exports = function (url, opts, cb) {
+  if(!cb)
+    cb = opts, opts = {}
+  var tmpdir = opts.tmp || os.tmpdir()
   var hash, n = 2
-  var tmp = path.join(os.tmpdir(), ''+ Date.now() + Math.random())
+  var tmp = path.join(tmpdir, ''+ Date.now() + Math.random())
   var tmpFile = path.join(tmp, 'package.tgz')
   var tmpDir = path.join(tmp, 'package')
   var _url = toGithubDownload(url)
