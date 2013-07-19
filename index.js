@@ -8,7 +8,7 @@ var zlib = require('zlib')
 var fstream = require('fstream')
 var path = require('path')
 var request = require('request')
-var os = require('os')
+var os = require('osenv')
 
 function toGithubDownload (repo) {
   //git://github.com/substack/sockjs-client.git#browserify-npm

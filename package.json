@@ -11,7 +11,8 @@
     "mkdirp": "~0.3.5",
     "fstream": "~0.1.22",
     "tar": "~0.1.17",
-    "request": "~2.21.0"
+    "request": "~2.21.0",
+    "osenv": "0.0.3"
   },
   "devDependencies": {
     "tape": "~1.0.4"
