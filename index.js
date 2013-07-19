@@ -71,8 +71,12 @@ var resolve = module.exports = function (url, opts, cb) {
                 cb(err)
               })
               .pipe(fs.createWriteStream(tarball))
-              .on('finish', next)
-            
+              //use close because it works in 0.8
+              //I want to support old versions, if possible  
+              //because like apt-get install nodejs gives 0.6...
+              //stupid - but it's out of my control.
+              //.on('finish', next)
+              .on('close', next)
             fs.readFile(path.join(tmp, 'package', 'package.json'), 'utf8',
               function (err, file) {
                 try { pkg = JSON.parse(file) }
