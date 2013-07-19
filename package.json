@@ -1,7 +1,7 @@
 {
   "name": "npmd-git-resolve",
   "description": "",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "homepage": "https://github.com/dominictarr/npmd-git-resolve",
   "repository": {
     "type": "git",
