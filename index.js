@@ -88,7 +88,7 @@ var resolve = module.exports = function (url, opts, cb) {
               if(--n) return
               var cache = path.join(process.env.HOME, '.npm', pkg.name, h)
               fs.rename(tmp, cache, function (err) {
-                if(err.code !== 'ENOTEMPTY')
+                if(err && err.code !== 'ENOTEMPTY')
                   return cb(err)
                 pkg.shasum = h
                 pkg.from = url
