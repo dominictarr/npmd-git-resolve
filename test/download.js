@@ -17,3 +17,4 @@ function t (name, url) {
 t('readable-stream', 'git://github.com/isaacs/readable-stream.git')
 t('sockjs-client', 'git://github.com/substack/sockjs-client.git#browserify-npm')
 t('readable-stream', 'https://github.com/isaacs/readable-stream/archive/master.tar.gz')
+t('sockjs-client', 'substack/sockjs-client.git#browserify-npm')
