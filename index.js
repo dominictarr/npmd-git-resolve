@@ -16,7 +16,7 @@ function toGithubDownload (repo) {
   //https://codeload.github.com/substack/node-browser-resolve/tar.gz/dir-replace
   if(/^http/.test(repo)) return repo
 
-  var m = /^git:\/\/github.com\/([^#]+?).git(?:#(.*))?$/.exec(repo)
+  var m = /^(?:git:\/\/github.com\/)?([^#]+?).git(?:#(.*))?$/.exec(repo)
 
   if(m) return 'https://codeload.github.com/' + m[1] + '/tar.gz/' + (m[2] || 'master')
   return null
