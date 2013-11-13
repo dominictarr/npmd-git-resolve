@@ -89,7 +89,7 @@ var resolve = module.exports = function (url, opts, cb) {
               var cache = path.join(process.env.HOME, '.npm', pkg.name, h)
               mkdirp(path.dirname(cache), function() {
                 fs.rename(tmp, cache, function (err) {
-                  if(err.code !== 'ENOTEMPTY')
+                  if(err && err.code !== 'ENOTEMPTY')
                     return cb(err)
                   pkg.shasum = h
                   pkg.from = url
@@ -100,7 +100,6 @@ var resolve = module.exports = function (url, opts, cb) {
           })
         })
       }
-  
   })
 }
 
