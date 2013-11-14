@@ -1,7 +1,7 @@
 {
   "name": "npmd-git-resolve",
-  "description": "",
-  "version": "2.1.2",
+  "description": "resolve git urls as modules",
+  "version": "2.2.0",
   "homepage": "https://github.com/dominictarr/npmd-git-resolve",
   "repository": {
     "type": "git",
