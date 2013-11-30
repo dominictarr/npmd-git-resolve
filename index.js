@@ -10,14 +10,14 @@ var path = require('path')
 var request = require('request')
 var os = require('osenv')
 
-function toGithubDownload (repo) {
+function toGithub (repo) {
   //git://github.com/substack/sockjs-client.git#browserify-npm
   //https://github.com/isaacs/readable-stream/archive/master.tar.gz
   //https://codeload.github.com/substack/node-browser-resolve/tar.gz/dir-replace
   //git+ssh://git@github.com:isaacs/readable-stream.git
   if(/^http/.test(repo)) return repo
 
-  var m = /^(?:(?:git:\/\/github.com\/)|(?:git\+ssh:\/\/git@github.com:))?([^#]+?).git(?:#(.*))?$/.exec(repo)
+  var m = /^(?:(?:git:\/\/github.com\/)|(?:git\+ssh:\/\/git@github.com:))?([^#]+?)(?:\.git)?(?:#(.*))?$/.exec(repo)
 
   if(m) return 'https://codeload.github.com/' + m[1] + '/tar.gz/' + (m[2] || 'master')
   return null
@@ -31,7 +31,7 @@ var resolve = module.exports = function (url, opts, cb) {
   var tmp = path.join(tmpdir, ''+ Date.now() + Math.random())
   var tmpFile = path.join(tmp, 'package.tgz')
   var tmpDir = path.join(tmp, 'package')
-  var _url = toGithubDownload(url)
+  var _url = toGithub(url)
   if(!_url)
     return cb(new Error('cannot request from:'+url))
 
@@ -104,6 +104,7 @@ var resolve = module.exports = function (url, opts, cb) {
   })
 }
 
+module.exports.toGithub = toGithub
 
 if(!module.parent) {
   var url = "https://codeload.github.com/substack/node-browser-resolve/tar.gz/dir-replace"
